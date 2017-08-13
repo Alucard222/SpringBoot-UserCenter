@@ -19,7 +19,7 @@ public class UserVo {
     private String phone;
     @NotEmpty(message = "please set your password!")
     private String password;
-    private String name;
+    private String username;
     private String email;
     private String address;
 
@@ -28,7 +28,7 @@ public class UserVo {
         return "UserVo{" +
                 "email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", name='" + name + '\'' +
+                ", name='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", address='" + address + '\'' +
                 '}';

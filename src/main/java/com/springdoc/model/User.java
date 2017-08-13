@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -41,15 +42,19 @@ public class User {
     @NotEmpty(message ="*please provide your password")
     private String password;
 
-    @Column(name="name")
+    @Column(name="username")
     //@NotEmpty(message="*please provide your name")
-    private String name;
+    private String username;
 
     @Column(name="address")
     private String address;
 
-    @ManyToOne
-    private Role role;
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "role_id")})
+    private List<Authority> authorities;
 
     public long getId() {
         return id;
@@ -84,19 +89,11 @@ public class User {
     }
 
     public String getName() {
-        return name;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
+        return username;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.username = name;
     }
 
     public String getAddress() {
@@ -107,5 +104,11 @@ public class User {
         this.address = address;
     }
 
+    public List<Authority> getAuthorities() {
+        return authorities;
+    }
 
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
+    }
 }

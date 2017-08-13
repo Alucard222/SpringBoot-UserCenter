@@ -2,6 +2,7 @@ package com.springdoc.service;
 
 import com.springdoc.controller.vo.ProcessStatus;
 import com.springdoc.controller.vo.ResponseVo;
+import com.springdoc.model.Authority;
 import com.springdoc.model.Role;
 import com.springdoc.model.User;
 import com.springdoc.repository.RoleRepository;
@@ -15,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by alucard on 8/4/17.
@@ -52,8 +56,8 @@ public class UserService {
                 .phone(user.getPhone())
                 .address(user.getAddress())
                 .email(user.getEmail())
-                .name(user.getName())
-                .role(roleRepository.findByRole("ADMIN"))
+                .username(user.getName())
+                .authorities(roleRepository.findByRole(Authority.USER))
                 .build();
         userRepository.save(newUser);
     }

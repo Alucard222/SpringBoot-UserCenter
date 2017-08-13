@@ -18,7 +18,7 @@ public class UserConverter extends Converter<User, UserVo>{
                 .password(user.getPassword())
                 .address(user.getAddress())
                 .email(user.getEmail())
-                .name(user.getName())
+                .username(user.getName())
                 .phone(user.getPhone())
                 .build();
     }
@@ -27,7 +27,7 @@ public class UserConverter extends Converter<User, UserVo>{
     protected User doBackward(UserVo userVo){
         return User.builder()
                 .phone(userVo.getPhone())
-                .name(userVo.getName())
+                .username(userVo.getUsername())
                 .password(userVo.getPassword())
                 .email(userVo.getEmail())
                 .address(userVo.getAddress())
