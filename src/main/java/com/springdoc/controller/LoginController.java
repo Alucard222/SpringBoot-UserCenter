@@ -37,7 +37,7 @@ public class LoginController {
     public String dashboard(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
-        return "here is the dashboard! hello" + user.getName();
+        return "here is the dashboard! hello" + user.getUsername();
     }
 
 

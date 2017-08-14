@@ -9,6 +9,8 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -36,7 +38,6 @@ public class User {
     @NotEmpty(message = "*please provide your email")
     private String email;
 
-
     @Column(name = "password")
     @Length(min=5, message="*Your password must have at least 5 characters")
     @NotEmpty(message ="*please provide your password")
@@ -49,12 +50,16 @@ public class User {
     @Column(name="address")
     private String address;
 
+    @Column(name = "LASTPASSWORDRESETDATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastPasswordResetDate;
+
     @OneToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
     @JoinTable(
             name = "user_role",
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "role_id")})
-    private List<Authority> authorities;
+    private List<Role> role;
 
     public long getId() {
         return id;
@@ -88,12 +93,12 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
+    public String getUsername() {
         return username;
     }
 
-    public void setName(String name) {
-        this.username = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getAddress() {
@@ -104,11 +109,19 @@ public class User {
         this.address = address;
     }
 
-    public List<Authority> getAuthorities() {
-        return authorities;
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
     }
 
-    public void setAuthorities(List<Authority> authorities) {
-        this.authorities = authorities;
+    public void setLastPasswordResetDate(Date lastPasswordResetDate) {
+        this.lastPasswordResetDate = lastPasswordResetDate;
+    }
+
+    public List<Role> getRole() {
+        return role;
+    }
+
+    public void setRole(List<Role> role) {
+        this.role = role;
     }
 }

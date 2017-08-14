@@ -35,19 +35,16 @@ public class Role {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public Authority getRole() {
         return role;
     }
+
     public void setRole(Authority role) {
         this.role = role;
     }
-//    public List<User> getUsers() {
-//        return users;
-//    }
-//    public void setUsers(List<User> users) {
-//        this.users = users;
-//    }
 }

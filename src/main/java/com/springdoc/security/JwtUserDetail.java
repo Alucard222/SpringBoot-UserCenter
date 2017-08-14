@@ -5,6 +5,7 @@ import com.springdoc.model.Authority;
 import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Date;
@@ -23,6 +24,7 @@ public class JwtUserDetail implements UserDetails {
     private final String username;
     private Collection<? extends GrantedAuthority> authorities;
     private final String address;
+    private final Date lastPasswordResetDate;
 
     public Long getId() {
         return id;
@@ -84,4 +86,8 @@ public class JwtUserDetail implements UserDetails {
         return true;
     }
 
+    @JsonIgnore
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
+    }
 }

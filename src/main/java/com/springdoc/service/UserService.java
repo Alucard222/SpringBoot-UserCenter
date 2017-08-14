@@ -1,5 +1,6 @@
 package com.springdoc.service;
 
+import com.springdoc.common.TimeProvider;
 import com.springdoc.controller.vo.ProcessStatus;
 import com.springdoc.controller.vo.ResponseVo;
 import com.springdoc.model.Authority;
@@ -24,14 +25,14 @@ import java.util.List;
  * Created by alucard on 8/4/17.
  */
 
-@Service("userService")
+@Service
 public class UserService {
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
-    }
+//    @Bean
+//    public BCryptPasswordEncoder passwordEncoder() {
+//        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//        return bCryptPasswordEncoder;
+//    }
 
 
     @Autowired
@@ -40,6 +41,8 @@ public class UserService {
     private RoleRepository roleRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private TimeProvider timeProvider;
 
 
     public User findUserByEmail(String email){
@@ -56,8 +59,9 @@ public class UserService {
                 .phone(user.getPhone())
                 .address(user.getAddress())
                 .email(user.getEmail())
-                .username(user.getName())
-                .authorities(roleRepository.findByRole(Authority.USER))
+                .username(user.getUsername())
+                .role(roleRepository.findByRole(Authority.USER))
+                .lastPasswordResetDate(timeProvider.now())
                 .build();
         userRepository.save(newUser);
     }

@@ -18,8 +18,9 @@ public class UserConverter extends Converter<User, UserVo>{
                 .password(user.getPassword())
                 .address(user.getAddress())
                 .email(user.getEmail())
-                .username(user.getName())
+                .username(user.getUsername())
                 .phone(user.getPhone())
+                .lastPasswordResetDate(user.getLastPasswordResetDate())
                 .build();
     }
 
@@ -31,6 +32,7 @@ public class UserConverter extends Converter<User, UserVo>{
                 .password(userVo.getPassword())
                 .email(userVo.getEmail())
                 .address(userVo.getAddress())
+                .lastPasswordResetDate(userVo.getLastPasswordResetDate())
                 .build();
     }
 }

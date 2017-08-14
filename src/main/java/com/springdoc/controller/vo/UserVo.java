@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import java.util.Date;
+
 /**
  * Created by alucard on 8/4/17.
  */
@@ -22,15 +24,5 @@ public class UserVo {
     private String username;
     private String email;
     private String address;
-
-    @Override
-    public String toString() {
-        return "UserVo{" +
-                "email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", name='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", address='" + address + '\'' +
-                '}';
-    }
+    private Date lastPasswordResetDate;
 }

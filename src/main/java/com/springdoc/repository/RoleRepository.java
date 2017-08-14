@@ -11,5 +11,5 @@ import java.util.List;
  * Created by alucard on 8/4/17.
  */
 public interface RoleRepository extends JpaRepository<Role, Integer> {
-    List<Authority> findByRole(Authority auth);
+    List<Role> findByRole(Authority auth);
 }
