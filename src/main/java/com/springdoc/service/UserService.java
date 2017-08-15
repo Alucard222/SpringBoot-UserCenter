@@ -28,13 +28,6 @@ import java.util.List;
 @Service
 public class UserService {
 
-//    @Bean
-//    public BCryptPasswordEncoder passwordEncoder() {
-//        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-//        return bCryptPasswordEncoder;
-//    }
-
-
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -45,9 +38,9 @@ public class UserService {
     private TimeProvider timeProvider;
 
 
-    public User findUserByEmail(String email){
-        return userRepository.findByEmail(email);
-    }
+//    public User findUserByEmail(String email){
+//        return userRepository.findByEmail(email);
+//    }
 
     public User findUserByPhone(String phone){
         return userRepository.findByPhone(phone);
@@ -70,22 +63,12 @@ public class UserService {
     public ResponseEntity<ResponseVo> registration(User user){
 
         User userExists = findUserByPhone(user.getPhone());
-        User userExists2 = findUserByEmail(user.getEmail());
 
         if(userExists != null){
-
             ResponseVo  responseVo = ResponseVo.builder()
                     .timestamp(Timestamp.valueOf(LocalDateTime.now()).getNanos())
                     .processStatus(ProcessStatus.FAIL)
                     .message("the phone number is already used, please input a new one")
-                    .build();
-            return new ResponseEntity<>(responseVo, HttpStatus.BAD_REQUEST);
-        }else if(userExists2 != null){
-
-            ResponseVo  responseVo = ResponseVo.builder()
-                    .timestamp(Timestamp.valueOf(LocalDateTime.now()).getNanos())
-                    .processStatus(ProcessStatus.FAIL)
-                    .message("the phone email is already used, please input a new one")
                     .build();
             return new ResponseEntity<>(responseVo, HttpStatus.BAD_REQUEST);
         }else{

@@ -34,17 +34,13 @@ public class User {
     private String phone;
 
     @Column(name= "email")
-    @Email(message = "*please provide a valid email")
-    @NotEmpty(message = "*please provide your email")
     private String email;
 
     @Column(name = "password")
-    @Length(min=5, message="*Your password must have at least 5 characters")
     @NotEmpty(message ="*please provide your password")
     private String password;
 
     @Column(name="username")
-    //@NotEmpty(message="*please provide your name")
     private String username;
 
     @Column(name="address")
@@ -54,7 +50,7 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastPasswordResetDate;
 
-    @OneToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
     @JoinTable(
             name = "user_role",
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "user_id")},
@@ -123,5 +119,19 @@ public class User {
 
     public void setRole(List<Role> role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
+                ", address='" + address + '\'' +
+                ", lastPasswordResetDate=" + lastPasswordResetDate +
+                ", role=" + role +
+                '}';
     }
 }

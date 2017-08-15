@@ -42,7 +42,7 @@ public class JwtUserDetail implements UserDetails {
     //take care
     @Override
     public String getUsername() {
-        return username;
+        return phone;
     }
 
     @JsonIgnore

@@ -24,6 +24,7 @@ public final class JwtUserFactory {
         return JwtUserDetail.builder()
                 .id(user.getId())
                 .email(user.getEmail())
+                .password(user.getPassword())
                 .phone(user.getPhone())
                 .username(user.getUsername())
                 .authorities(mapToGrantedAuthorities(user.getRole()))

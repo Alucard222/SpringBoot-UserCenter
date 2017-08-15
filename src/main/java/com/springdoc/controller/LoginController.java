@@ -36,7 +36,7 @@ public class LoginController {
     @RequestMapping(value="/dashboard", method=RequestMethod.GET)
     public String dashboard(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
+        User user = userService.findUserByPhone(auth.getName());
         return "here is the dashboard! hello" + user.getUsername();
     }
 

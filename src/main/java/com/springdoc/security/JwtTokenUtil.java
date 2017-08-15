@@ -145,13 +145,14 @@ public class JwtTokenUtil implements Serializable {
     public String doGenerateToken(Map<String, Object> claims){
         final Date createdDate = (Date)claims.get(CLAIM_KEY_CREATED);
         //老司机改过，*1000的意思就是秒
-        final Date expirationDate = new Date(createdDate.getTime() + TimeUnit.MILLISECONDS.toSeconds(expiration));
+        //final Date expirationDate = new Date(createdDate.getTime() + TimeUnit.MILLISECONDS.toSeconds(expiration));
+        final Date expirationDate = new Date(createdDate.getTime() + expiration * 1000);
         System.out.println("doGenerateToken " + createdDate);
 
         return Jwts.builder()
                 .setClaims(claims)
                 .setExpiration(expirationDate)
-                .signWith(SignatureAlgorithm.ES512, secret)
+                .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
     }
 
