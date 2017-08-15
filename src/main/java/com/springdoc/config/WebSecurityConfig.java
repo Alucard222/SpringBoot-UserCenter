@@ -63,27 +63,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(unauthorizedHandler)
                 //关闭session
                 .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-
+                    .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .authorizeRequests()
-                //.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/registration",
-                            "/test",
-                            "/dashboard"
-                ).permitAll()
-                // 允许访问静态资源
-//                .antMatchers(
-//                        HttpMethod.GET,
-//                        "/",
-//                        "/*.html",
-//                        "/favicon.ico",
-//                        "/**/*.html",
-//                        "/**/*.css",
-//                        "/**/*.js"
-//                ).permitAll()
+                    .antMatchers("/registration/**").permitAll()
                 //打开授权端点的权限
-                .antMatchers("/auth/**").permitAll()
+                    .antMatchers("/auth/**").permitAll()
+                //ADMIN端点需要ADMIN权限
+                    .antMatchers("/admin/**").hasAnyAuthority("ADMIN")
                 //对于剩余权限，需要验证
                 .anyRequest().authenticated();
 

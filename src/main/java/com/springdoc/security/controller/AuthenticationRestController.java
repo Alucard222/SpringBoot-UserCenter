@@ -51,8 +51,6 @@ public class AuthenticationRestController {
                 )
         );
 
-        //System.out.println(authentication.getAuthorities());
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         //Reload password post-security so we can generate token

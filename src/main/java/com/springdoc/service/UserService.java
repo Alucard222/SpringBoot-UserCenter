@@ -38,10 +38,6 @@ public class UserService {
     private TimeProvider timeProvider;
 
 
-//    public User findUserByEmail(String email){
-//        return userRepository.findByEmail(email);
-//    }
-
     public User findUserByPhone(String phone){
         return userRepository.findByPhone(phone);
     }

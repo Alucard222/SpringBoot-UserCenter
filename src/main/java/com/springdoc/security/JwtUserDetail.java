@@ -68,10 +68,6 @@ public class JwtUserDetail implements UserDetails {
         return password;
     }
 
-    public String getName() {
-        return username;
-    }
-
     public String getAddress() {
         return address;
     }

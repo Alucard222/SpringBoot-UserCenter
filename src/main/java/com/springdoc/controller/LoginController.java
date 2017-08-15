@@ -33,21 +33,6 @@ public class LoginController {
         this.userConverter = userConverter;
     }
 
-    @RequestMapping(value="/dashboard", method=RequestMethod.GET)
-    public String dashboard(){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByPhone(auth.getName());
-        return "here is the dashboard! hello" + user.getUsername();
-    }
-
-
-
-    //test page
-    @RequestMapping(value="/test", method=RequestMethod.GET)
-    public String test(){
-        return "hello!";
-    }
-
     //registration page
     @CrossOrigin
     @RequestMapping(value="/registration", method= RequestMethod.POST)

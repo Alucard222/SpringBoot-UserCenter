@@ -134,9 +134,7 @@ public class JwtTokenUtil implements Serializable {
         //take care!
         claims.put(CLAIM_KEY_USERNAME, userDetail.getUsername());
         claims.put(CLAIM_KEY_AUDIENCE, generateAudience(device));
-
-        final Date createDate = timeProvider.now();
-        claims.put(CLAIM_KEY_CREATED, createDate);
+        claims.put(CLAIM_KEY_CREATED, timeProvider.now());
 
         return doGenerateToken(claims);
     }
